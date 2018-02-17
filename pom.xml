@@ -7,6 +7,8 @@
     <groupId>pro.schuhmann.3ds</groupId>
     <artifactId>tmdlib-java</artifactId>
     <version>0.1</version>
+    <name>TMDLib-Java</name>
+    <description>Java library for parsing Nintendo TMD (Title Metadata) files </description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,11 +16,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -31,7 +28,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0-M1</version>
+                <version>3.0.0</version>
                 <configuration>
                     <reportOutputDirectory>${project.basedir}</reportOutputDirectory>
                     <destDir>docs</destDir>

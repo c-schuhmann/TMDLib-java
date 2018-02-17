@@ -1,2 +1,5 @@
 language: java
-script: mvn compile javadoc:javadoc
+script: mvn javadoc:javadoc
+cache:
+  directories:
+  - $HOME/.m2
