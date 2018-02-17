@@ -14,6 +14,8 @@ import java.util.List;
  * Retrieve information about TMD files by creating an instance from this class.
  * NOTE: ONLY 3DS TMD files are officially supported at this time!
  *
+ * TODO: Write some Unit tests. Some time. In the future. Maybe.
+ *
  * @see <a href="https://3dbrew.org/wiki/Title_metadata">3dbrew: Title Metadata</a>
  */
 public class TMD {
@@ -24,9 +26,10 @@ public class TMD {
   private List<ContentChunkRecord> contentChunkRecords;
 
   /**
-   * Create a new instance of a TMD object.
+   * Create a new TMD object.
    *
    * @param tmdFile A {@link File} object pointing to the TMD file.
+   * @throws IOException An error occurred while reading the TMD file.
    */
   public TMD(File tmdFile) throws IOException {
     TmdFileReader tmdFileReader = new TmdFileReader(tmdFile);
@@ -37,6 +40,7 @@ public class TMD {
    * Setup method for creating a new TMD instance. Only called by TMD constructor.
    *
    * @param tmdFile A TmdFileReader pointing to a TMD file.
+   * @throws IOException An error occurred while reading the TMD file.
    */
   private void setup(TmdFileReader tmdFile) throws IOException {
     /*
@@ -106,25 +110,30 @@ public class TMD {
     return signatureData;
   }
 
+  /**
+   * Get the {@link Header} of the TMD.
+   *
+   * @return A {@link Header} object.
+   */
   public Header getHeader() {
     return header;
   }
 
+  /**
+   * Get all {@link ContentInfoRecord} objects from the TMD.
+   *
+   * @return A list of {@link ContentInfoRecord} objects.
+   */
   public List<ContentInfoRecord> getContentInfoRecords() {
     return contentInfoRecords;
   }
 
+  /**
+   * Get all {@link ContentChunkRecord} objects from the TMD.
+   *
+   * @return A list of {@link ContentChunkRecord} objects.
+   */
   public List<ContentChunkRecord> getContentChunkRecords() {
     return contentChunkRecords;
-  }
-
-  public void testPrintlnAll() {
-    signatureData.testPrintlnAll();
-    System.out.println();
-    header.testPrintlnAll();
-    System.out.println();
-    for (ContentInfoRecord cir : contentInfoRecords) {
-      cir.testPrintlnAll();
-    }
   }
 }

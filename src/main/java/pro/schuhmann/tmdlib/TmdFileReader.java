@@ -13,7 +13,7 @@ public class TmdFileReader {
   private RandomAccessFile tmdFile;
 
   /**
-   * Create a new TmdFileReader.
+   * Create a new TmdFileReader. These objects are only created by the {@link TMD} constructor.
    *
    * @param f A {@link File} pointing to a TMD file.
    * @throws FileNotFoundException TMD file couldn't be found.
@@ -71,14 +71,15 @@ public class TmdFileReader {
   }
 
   /**
-   * Read a hexadecimal String from a file.
-   * Partly stolen from: <a href="https://stackoverflow.com/a/9855338">Stackoverflow</a> & modified.
+   * Read a hexadecimal String from the TMD file.
+   * Mostly stolen from: <a href="https://stackoverflow.com/a/9855338">Stackoverflow</a> (modified)
    *
    * @param index  The start of the hexadecimal String in the file. (eg. offset 0x140)
    * @param length The length of the hexadecimal String in the file. (eg. 40 bytes)
-   * @return A HexString in format "0x0123456789ABCDEF".
+   * @return A {@link HexString} in format "0x0123456789ABCDEF".
+   * @throws IOException An error occurred while reading the TMD file.
    */
-  public HexString getHexString(long index, int length) throws IOException{
+  public HexString getHexString(long index, int length) throws IOException {
     byte[] bytes = readByteArray(index, length);
     if (bytes.length == 0)
       throw new IllegalArgumentException();
@@ -94,26 +95,36 @@ public class TmdFileReader {
   }
 
   /**
-   * Read a String from a File.
+   * Read a String from the TMD file.
    *
    * @param index  The start of the String in the file. (eg. offset 0x140)
    * @param length The length of the String in the file. (eg. 40 bytes)
    * @return A string.
+   * @throws IOException An error occurred while reading the TMD file.
    */
   public String getString(long index, int length) throws IOException {
     byte[] bytes = readByteArray(index, length);
-    if (bytes.length == 0)
+    if (bytes.length == 0) {
       throw new IllegalArgumentException();
-
-    String newString = "";
-    for (byte b : bytes)
-    {
-      newString += (char) (b & 0xFF);
     }
 
-    return newString.trim();
+    StringBuilder newString = new StringBuilder();
+    for (byte b : bytes)
+    {
+      newString.append((char) (b & 0xFF));
+    }
+
+    return newString.toString().trim();
   }
 
+  /**
+   * Read a byte array from the TMD file.
+   *
+   * @param index  The start index. (eg. offset 0x140)
+   * @param length The length. (eg. 40 bytes)
+   * @return A byte array.
+   * @throws IOException An error occurred while reading the TMD file.
+   */
   private byte[] readByteArray(long index, int length) throws IOException {
     byte[] bytes = new byte[length];
     tmdFile.seek(index);

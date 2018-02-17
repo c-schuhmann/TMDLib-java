@@ -5,6 +5,9 @@ import pro.schuhmann.tmdlib.TmdFileReader;
 
 import java.io.IOException;
 
+/**
+ * Retrieve information about Content Chunk Records by creating an instance from this class.
+ */
 public class ContentChunkRecord {
 
   private int contentId;
@@ -13,6 +16,14 @@ public class ContentChunkRecord {
   private long contentSize;
   private HexString sha256hash;
 
+  /**
+   * Create a new content chunk record object. These objects are only created by the
+   * {@link pro.schuhmann.tmdlib.TMD} constructor.
+   *
+   * @param tmdFile A TmdFileReader pointing to a TMD file.
+   * @param contentChunkOffsetInFile The offset in the TMD file, where the content chunk records are located.
+   * @throws IOException An error occurred while reading the TMD file.
+   */
   public ContentChunkRecord(TmdFileReader tmdFile, int contentChunkOffsetInFile) throws IOException {
     this.contentId    = tmdFile.getInt(contentChunkOffsetInFile);
     this.contentIndex = tmdFile.getShort(contentChunkOffsetInFile + 0x4);
@@ -21,32 +32,48 @@ public class ContentChunkRecord {
     this.sha256hash   = tmdFile.getHexString(contentChunkOffsetInFile + 0x10, 0x20);
   }
 
+  /**
+   * Get the content ID of the content chunk record.
+   *
+   * @return The contend ID.
+   */
   public int getContentId() {
     return contentId;
   }
 
+  /**
+   * Get the content index of the content chunk record.
+   *
+   * @return The content index.
+   */
   public short getContentIndex() {
     return contentIndex;
   }
 
+  /**
+   * Get the content type of the content chunk record.
+   *
+   * @return The content type.
+   */
   public short getContentType() {
     return contentType;
   }
 
+  /**
+   * Get the content size of the content chunk record.
+   *
+   * @return The content size.
+   */
   public long getContentSize() {
     return contentSize;
   }
 
+  /**
+   * Get the SHA256 hash of the content chunk record.
+   *
+   * @return A HexString containing a SHA256 hash.
+   */
   public HexString getSha256hash() {
     return sha256hash;
-  }
-
-  public void testPrintlnAll() {
-    System.out.println("----- Content Chunk Record -----");
-    System.out.println("Content ID: " + contentId);
-    System.out.println("Content Index: " + contentIndex);
-    System.out.println("Content Type: " + contentType);
-    System.out.println("Content Size: " + contentSize);
-    System.out.println("SHA256 Hash: " + sha256hash);
   }
 }

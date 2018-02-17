@@ -1,20 +1,22 @@
 package pro.schuhmann.tmdlib.enums;
 
+/**
+ * An enumeration of the different signature types. All signature types are identified by the value of the first four
+ * bytes of a TMD file. The length and the padding of the signature depends on the signature type.
+ */
 public enum SignatureType {
 
-  RSA_4096_SHA1      (0x010000, 0x200, 0x3C),
-  RSA_2048_SHA1      (0x010001, 0x100, 0x3C),
-  ELLIPTIC_CURVE_SHA1(0x010002, 0x3C , 0x40),
-  RSA_4096_SHA256    (0x010003, 0x200, 0x3C),
-  RSA_2048_SHA256    (0x010004, 0x100, 0x3C),
-  ECDSA_SHA256       (0x010005, 0x3C , 0x40);
+  RSA_4096_SHA1      (0x200, 0x3C), // Unused for 3DS
+  RSA_2048_SHA1      (0x100, 0x3C), // Unused for 3DS
+  ELLIPTIC_CURVE_SHA1(0x3C , 0x40), // Unused for 3DS
+  RSA_4096_SHA256    (0x200, 0x3C),
+  RSA_2048_SHA256    (0x100, 0x3C),
+  ECDSA_SHA256       (0x3C , 0x40);
 
-  private final int value;
   private final int signatureSize;
   private final int paddingSize;
 
-  SignatureType(int value, int signatureSize, int paddingSize) {
-    this.value         = value;
+  SignatureType(int signatureSize, int paddingSize) {
     this.signatureSize = signatureSize;
     this.paddingSize   = paddingSize;
   }
