@@ -3,7 +3,7 @@
 
 ### Usage & Requirements
 1. Include the library either:
-  * per compiled jar file
+  * per compiled jar file - No other dependencies needed!
   * per [JitPack.io](https://jitpack.io/#c-schuhmann/TMDLib-java/) (for usage within Maven, Gradle...)
 2. Get a TMD file
 3. Pass the file to the TMD constructor (pro.schuhmann.tmdlib.TMD)
@@ -25,14 +25,10 @@ This is more or less a project for myself, but if you really want to contribute:
 Give me some advice, what I can do better :)
 
 ### Roadmap
-- WIP: Identify certificates attaches to the TMD file (planned for pre-release 0.2)
-- Add JUnit tests (Planned for pre-release 0.3)
-- Add compatibility for other TMD types (Planned for release 1.0)
-
-If the TMD file is obtained from Nintendo's CDN, then it will have two certificates appended at the end of the file. 
-Thogether they (always?) have a size of 1792 bytes, but the area from the last content chunk record to the first 
-certificate seems to have a variable size. Before the first certificate begins, the TMD file contains some data with 
-variable length, which can't be identified at the moment.
+- Add JUnit tests (Planned for pre-release 0.3.0)
+- Rework some classes and methods (Planned for release 1.0.0)
+- Add compatibility for other TMD types (Planned for release 1.0.0 or later)
+- Add usage examples (some time)
 
 ### Thanks
 This project would'nt be possible without [3DBrew](https://3dbrew.org/wiki/Title_metadata)!
