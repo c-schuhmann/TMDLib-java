@@ -1,5 +1,5 @@
 language: java
-script: mvn javadoc:javadoc
+script: mvn javadoc:javadoc test
 cache:
   directories:
   - $HOME/.m2
