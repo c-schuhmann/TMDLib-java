@@ -1,9 +1,6 @@
 package pro.schuhmann.tmdlib;
 
-import pro.schuhmann.tmdlib.parts.ContentChunkRecord;
-import pro.schuhmann.tmdlib.parts.ContentInfoRecord;
-import pro.schuhmann.tmdlib.parts.Header;
-import pro.schuhmann.tmdlib.parts.SignatureData;
+import pro.schuhmann.tmdlib.parts.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +21,7 @@ public class TMD {
   private Header header;
   private List<ContentInfoRecord> contentInfoRecords;
   private List<ContentChunkRecord> contentChunkRecords;
+  private Certificate[] certificates;
 
   /**
    * Create a new TMD object.
@@ -50,7 +48,8 @@ public class TMD {
      * it's signature type. The other parts of the TMD file all have a fixed size, but the
      * location in the file depends on the signature data length.
      */
-    this.signatureData = new SignatureData(tmdFile);
+
+    this.signatureData = new SignatureData(tmdFile, 0);
     final int signatureDataSize = signatureData.getSignatureType().getSignatureDataSize();
 
     /*
@@ -99,6 +98,27 @@ public class TMD {
       int offset = signatureDataSize + 0x9C4 + chunkRecordIndex * 0x30;
       contentChunkRecords.add(new ContentChunkRecord(tmdFile, offset));
     }
+
+    /*
+     * --- Certificates ---
+     *
+     * If the TMD file is obtained from Nintendo's CDN, then it will have two certificates appended at the end of the
+     * file. These two certificates together always have a size of 0x700 bytes, so the first certificate must start at
+     * offset "EndOfFile - 0x700". The first certificate has a size of 0x300 bytes, so the second certificate must start
+     * at offset "EndOfFile - 0x400".
+     *
+     * Type of the first certificate:  RSA_2048_SHA256 (0x010004)
+     * Type of the second certificate: RSA_4096_SHA256 (0x010003)
+     */
+
+    int certificateOffset = tmdFile.getFileLength() - 0x700;
+    // Check whether the certificates are available:
+    if (tmdFile.getInt(certificateOffset) == 0x010004 && tmdFile.getInt(certificateOffset + 0x300) == 0x010003) {
+      // Certificates are available!
+      certificates    = new Certificate[2];
+      certificates[0] = new Certificate(tmdFile, certificateOffset);
+      certificates[1] = new Certificate(tmdFile, certificateOffset + 0x300);
+    }
   }
 
   /**
@@ -135,5 +155,14 @@ public class TMD {
    */
   public List<ContentChunkRecord> getContentChunkRecords() {
     return contentChunkRecords;
+  }
+
+  /**
+   * Get the certificates of the TMD, if available.
+   *
+   * @return Two certificates or {@code null}, if not available.
+   */
+  public Certificate[] getCertificates() {
+    return certificates;
   }
 }

@@ -17,10 +17,9 @@ public class ContentChunkRecord {
   private HexString sha256hash;
 
   /**
-   * Create a new content chunk record object. These objects are only created by the
-   * {@link pro.schuhmann.tmdlib.TMD} constructor.
+   * Create a new content chunk record object.
    *
-   * @param tmdFile A TmdFileReader pointing to a TMD file.
+   * @param tmdFile A {@link TmdFileReader} pointing to a TMD file.
    * @param contentChunkOffsetInFile The offset in the TMD file, where the content chunk records are located.
    * @throws IOException An error occurred while reading the TMD file.
    */

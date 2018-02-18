@@ -131,4 +131,14 @@ public class TmdFileReader {
     tmdFile.read(bytes, 0, length);
     return bytes;
   }
+
+  /**
+   * get the length of the TMD file.
+   *
+   * @return The TMD file length in bytes.
+   */
+  public int getFileLength() throws IOException{
+    // TMD files are usually ~4700 bytes, the biggest one i've seen was 18.388 bytes!
+    return (int) tmdFile.length();
+  }
 }

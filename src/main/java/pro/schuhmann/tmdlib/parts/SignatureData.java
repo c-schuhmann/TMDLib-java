@@ -7,7 +7,7 @@ import pro.schuhmann.tmdlib.enums.SignatureType;
 import java.io.IOException;
 
 /**
- * Retrieve information about the Signature Data by creating an instance from this class.
+ * Retrieve information about Signature Data by creating an instance from this class.
  */
 public class SignatureData {
 
@@ -15,19 +15,18 @@ public class SignatureData {
   private HexString signature;
 
   /**
-   * Create a new signature data object. These objects are only created by the
-   * {@link pro.schuhmann.tmdlib.TMD} constructor.
+   * Create a new signature data object.
    *
    * @param tmdFile A TmdFileReader pointing to a TMD file.
    * @throws IOException An error occurred while reading the TMD file.
    */
-  public SignatureData(TmdFileReader tmdFile) throws IOException {
-    this.signatureType = SignatureType.getByValue(tmdFile.getInt(0));
+  public SignatureData(TmdFileReader tmdFile, int signatureDataOffsetInFile) throws IOException {
+    this.signatureType = SignatureType.getByValue(tmdFile.getInt(signatureDataOffsetInFile));
 
     if (signatureType == null)
-      throw new NullPointerException("The signature type couldn't be identified! Make sure your TMD file is valid.");
+      throw new NullPointerException("The signature type couldn't be identified! Make sure the given file is valid.");
 
-    this.signature     = tmdFile.getHexString(4, signatureType.getSignatureSize());
+    this.signature = tmdFile.getHexString(signatureDataOffsetInFile + 0x4, signatureType.getSignatureSize());
   }
 
   /**
@@ -40,9 +39,9 @@ public class SignatureData {
   }
 
   /**
-   * Get the signature of the TMD. The hash for the signature is calculated over the header of the TMD.
+   * Get the signature.
    *
-   * @return A HexString containing the signature of the TMD.
+   * @return A HexString containing the signature.
    */
   public HexString getSignature() {
     return signature;
