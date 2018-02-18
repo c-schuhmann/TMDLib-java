@@ -2,7 +2,6 @@ package pro.schuhmann.tmdlib.parts;
 
 import pro.schuhmann.tmdlib.TmdFileReader;
 import pro.schuhmann.tmdlib.enums.PublicKeyType;
-import pro.schuhmann.tmdlib.enums.SignatureType;
 
 import java.io.IOException;
 
@@ -11,10 +10,10 @@ import java.io.IOException;
  */
 public class Certificate {
 
-  private SignatureData signatureData;
-  private String issuer;
-  private String name;
-  private PublicKey publicKey;
+  private final SignatureData signatureData;
+  private final String issuer;
+  private final String name;
+  private final PublicKey publicKey;
 
   /**
    * Create a new certificate object.

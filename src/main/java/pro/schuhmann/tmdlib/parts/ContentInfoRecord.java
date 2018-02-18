@@ -9,9 +9,9 @@ import java.io.IOException;
  * Retrieve information about Content Info Records by creating an instance from this class.
  */
 public class ContentInfoRecord {
-  private short contentIndexOffset;
-  private short contentCommandCount;
-  private HexString nextContentRecordsHash;
+  private final short contentIndexOffset;
+  private final short contentCommandCount;
+  private final HexString nextContentRecordsHash;
 
   /**
    * Create a new content info record object. These objects are only created by the

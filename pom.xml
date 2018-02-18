@@ -6,7 +6,7 @@
 
     <groupId>pro.schuhmann.3ds</groupId>
     <artifactId>tmdlib-java</artifactId>
-    <version>0.1</version>
+    <version>0.2.0</version>
     <name>TMDLib-Java</name>
     <description>Java library for parsing Nintendo TMD (Title Metadata) files </description>
 

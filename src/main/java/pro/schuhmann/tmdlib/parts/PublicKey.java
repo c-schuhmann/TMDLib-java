@@ -30,11 +30,14 @@ public class PublicKey {
       case RSA_4096:
         this.modulus        = tmdFile.getHexString(keyOffsetInFile, 0x200);
         this.publicExponent = tmdFile.getInt(keyOffsetInFile + 0x200);
+        break;
       case RSA_2048:
         this.modulus        = tmdFile.getHexString(keyOffsetInFile, 0x100);
         this.publicExponent = tmdFile.getInt(keyOffsetInFile + 0x100);
+        break;
       case ELLIPTIC_CURVE:
         this.publicKey      = tmdFile.getHexString(keyOffsetInFile, 0x3C);
+        break;
     }
   }
 

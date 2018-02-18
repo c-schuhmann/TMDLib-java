@@ -18,6 +18,7 @@ public class SignatureData {
    * Create a new signature data object.
    *
    * @param tmdFile A TmdFileReader pointing to a TMD file.
+   * @param signatureDataOffsetInFile The offset in the TMD file, where the signature data is located.
    * @throws IOException An error occurred while reading the TMD file.
    */
   public SignatureData(TmdFileReader tmdFile, int signatureDataOffsetInFile) throws IOException {

@@ -8,7 +8,7 @@ public enum PublicKeyType {
   RSA_2048(0x34),
   ELLIPTIC_CURVE(0x3C);
 
-  int paddingSize;
+  final int paddingSize;
 
   PublicKeyType(int paddingSize) {
     this.paddingSize = paddingSize;

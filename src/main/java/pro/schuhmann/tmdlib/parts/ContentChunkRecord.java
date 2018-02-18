@@ -10,11 +10,11 @@ import java.io.IOException;
  */
 public class ContentChunkRecord {
 
-  private int contentId;
-  private short contentIndex; //TODO: Create enum for content index
-  private short contentType;  //TODO: Create enum (+ set?) for content type
-  private long contentSize;
-  private HexString sha256hash;
+  private final int contentId;
+  private final short contentIndex; //TODO: Create enum for content index
+  private final short contentType;  //TODO: Create enum (+ set?) for content type
+  private final long contentSize;
+  private final HexString sha256hash;
 
   /**
    * Create a new content chunk record object.
