@@ -25,7 +25,6 @@ This is more or less a project for myself, but if you really want to contribute:
 Give me some advice, what I can do better :)
 
 ### Roadmap
-- Add JUnit tests (Planned for pre-release 0.3.0)
 - Rework some classes and methods (Planned for release 1.0.0)
 - Add compatibility for other TMD types (Planned for release 1.0.0 or later)
 - Add usage examples (some time)
