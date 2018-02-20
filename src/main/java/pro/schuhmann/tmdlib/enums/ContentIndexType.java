@@ -11,7 +11,7 @@ public enum ContentIndexType {
   /**
    * Get the content index type by it's type value.
    *
-   * @param value Content index type value as int.
+   * @param value Content index type value as short.
    * @return The content index type or {@code null}.
    */
   public static ContentIndexType getByValue(short value) {

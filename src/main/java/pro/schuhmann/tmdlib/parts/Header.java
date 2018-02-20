@@ -74,7 +74,6 @@ public class Header {
 
   /**
    * Get the ca_crl_version of the TMD. <br>
-   * TODO: More investigation: CRL *could* stand for
    * <a href="https://en.wikipedia.org/wiki/Certificate_revocation_list">Certificate revocation list</a>
    *
    * @return The ca_crl_version.
@@ -85,7 +84,6 @@ public class Header {
 
   /**
    * Get the signer_crl_version of the TMD. <br>
-   * TODO: More investigation: CRL *could* stand for
    * <a href="https://en.wikipedia.org/wiki/Certificate_revocation_list">Certificate revocation list</a>
    *
    * @return The signer_crl_version.
@@ -96,7 +94,7 @@ public class Header {
 
   /**
    * Get the system version of the TMD. <br>
-   * TODO: More investigation - Minimum system version?
+   * Authors Note: All ~1700 3DS TMDs I have tested return 0; Not a single exception.
    *
    * @return The system version.
    */
@@ -115,7 +113,7 @@ public class Header {
 
   /**
    * Get the title type. <br>
-   * TODO: More investigation - Possibly relating to Title ID: UID Title type?
+   * TODO: More investigation - Possibly relating to Title ID: UID Title type? https://www.3dbrew.org/wiki/Title_list
    *
    * @return the title type.
    */
@@ -164,8 +162,7 @@ public class Header {
 
   /**
    * Get the access rights. <br>
-   * TODO: More investigation: Possibly relating to <a href="https://3dbrew.org/wiki/NCCH/Extended_Header#Storage_Info">
-   *   NCCH Extended Header Storage Info</a>
+   * Authors note: All ~1700 3DS TMDs I have tested return 0; Not a single exception.
    *
    * @return The access rights.
    */
