@@ -11,8 +11,6 @@ import java.util.List;
  * Retrieve information about TMD files by creating an instance from this class.
  * NOTE: ONLY 3DS TMD files are officially supported at this time!
  *
- * TODO: Write some Unit tests. Some time. In the future. Maybe.
- *
  * @see <a href="https://3dbrew.org/wiki/Title_metadata">3dbrew: Title Metadata</a>
  */
 public class TMD {

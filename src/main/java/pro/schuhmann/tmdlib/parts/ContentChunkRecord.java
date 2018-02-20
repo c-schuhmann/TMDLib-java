@@ -2,6 +2,7 @@ package pro.schuhmann.tmdlib.parts;
 
 import pro.schuhmann.tmdlib.HexString;
 import pro.schuhmann.tmdlib.TmdFileReader;
+import pro.schuhmann.tmdlib.enums.ContentIndexType;
 
 import java.io.IOException;
 
@@ -11,7 +12,7 @@ import java.io.IOException;
 public class ContentChunkRecord {
 
   private final int contentId;
-  private final short contentIndex; //TODO: Create enum for content index
+  private final ContentIndexType contentIndex;
   private final short contentType;  //TODO: Create enum (+ set?) for content type
   private final long contentSize;
   private final HexString sha256hash;
@@ -25,7 +26,7 @@ public class ContentChunkRecord {
    */
   public ContentChunkRecord(TmdFileReader tmdFile, int contentChunkOffsetInFile) throws IOException {
     this.contentId    = tmdFile.getInt(contentChunkOffsetInFile);
-    this.contentIndex = tmdFile.getShort(contentChunkOffsetInFile + 0x4);
+    this.contentIndex = ContentIndexType.getByValue(tmdFile.getShort(contentChunkOffsetInFile + 0x4));
     this.contentType  = tmdFile.getShort(contentChunkOffsetInFile + 0x6);
     this.contentSize  = tmdFile.getLong(contentChunkOffsetInFile + 0x8);
     this.sha256hash   = tmdFile.getHexString(contentChunkOffsetInFile + 0x10, 0x20);
@@ -45,7 +46,7 @@ public class ContentChunkRecord {
    *
    * @return The content index.
    */
-  public short getContentIndex() {
+  public ContentIndexType getContentIndex() {
     return contentIndex;
   }
 
