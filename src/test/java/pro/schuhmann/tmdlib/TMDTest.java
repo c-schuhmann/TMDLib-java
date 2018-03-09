@@ -2,6 +2,8 @@ package pro.schuhmann.tmdlib;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import pro.schuhmann.tmdlib.enums.ContentIndexType;
+import pro.schuhmann.tmdlib.enums.ContentTypeFlag;
 import pro.schuhmann.tmdlib.enums.PublicKeyType;
 import pro.schuhmann.tmdlib.enums.SignatureType;
 import pro.schuhmann.tmdlib.parts.*;
@@ -94,8 +96,9 @@ public class TMDTest {
     HexString sha256hash   = new HexString("99813A2BF09F06EF2D4A34C5CF1F39A2FA27217138A9AB9EF1CE0A09025D5138");
 
     assertEquals(2, ccr.getContentId());
-    assertEquals(0, ccr.getContentIndex());
-    assertEquals(1, ccr.getContentType());
+    assertEquals(ContentIndexType.MAIN_CONTENT, ccr.getContentIndex());
+    assertEquals(1, ccr.getContentType().size());
+    assertTrue(ccr.getContentType().contains(ContentTypeFlag.ENCRYPTED));
     assertEquals(1431719936, ccr.getContentSize());
     assertTrue(sha256hash.equals(ccr.getSha256hash()));
 
@@ -103,8 +106,9 @@ public class TMDTest {
     sha256hash = new HexString("1F63895254EF6280839240F34D451D1FA8F7D6287AEDCAE5C72A0EDF9F292903");
 
     assertEquals(1, ccr.getContentId());
-    assertEquals(1, ccr.getContentIndex());
-    assertEquals(1, ccr.getContentType());
+    assertEquals(ContentIndexType.HOME_MENU_MANUAL, ccr.getContentIndex());
+    assertEquals(1, ccr.getContentType().size());
+    assertTrue(ccr.getContentType().contains(ContentTypeFlag.ENCRYPTED));
     assertEquals(6012928, ccr.getContentSize());
     assertTrue(sha256hash.equals(ccr.getSha256hash()));
   }
