@@ -8,7 +8,7 @@
 4. [Contributing](#Contributing)
 5. [Roadmap](#Roadmap)
 6. [Thanks](#Thanks)
-7. [Authors Note](#Authors Note)
+7. [Authors Note](#Authors-Note)
 
 ### Usage
 1. Include the library either:
