@@ -29,7 +29,7 @@ public class ContentChunkRecord {
   public ContentChunkRecord(TmdFileReader tmdFile, int contentChunkOffsetInFile) throws IOException {
     this.contentId    = tmdFile.getInt(contentChunkOffsetInFile);
     this.contentIndex = ContentIndexType.getByValue(tmdFile.getShort(contentChunkOffsetInFile + 0x4));
-    this.contentTypes  = ContentTypeFlag.getbyValue(tmdFile.getShort(contentChunkOffsetInFile + 0x6));
+    this.contentTypes = ContentTypeFlag.getbyValue(tmdFile.getShort(contentChunkOffsetInFile + 0x6));
     this.contentSize  = tmdFile.getLong(contentChunkOffsetInFile + 0x8);
     this.sha256hash   = tmdFile.getHexString(contentChunkOffsetInFile + 0x10, 0x20);
   }

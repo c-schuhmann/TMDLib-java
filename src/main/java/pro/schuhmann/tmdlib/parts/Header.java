@@ -2,8 +2,10 @@ package pro.schuhmann.tmdlib.parts;
 
 import pro.schuhmann.tmdlib.HexString;
 import pro.schuhmann.tmdlib.TmdFileReader;
+import pro.schuhmann.tmdlib.enums.TitleType;
 
 import java.io.IOException;
+import java.util.HashSet;
 
 /**
  * Retrieve information about the TMD Header by creating an instance from this class.
@@ -16,7 +18,7 @@ public class Header {
   private final byte signerCrlVersion;
   private final long systemVersion;
   private final HexString titleId;
-  private final int titleType;
+  private final HashSet<TitleType> titleType;
   private final short groupId;
   private final int saveDataSize;
   private final int srlPrivateSaveDataSize;
@@ -41,7 +43,7 @@ public class Header {
     this.signerCrlVersion       = tmdFile.getByte(headerOffsetInFile + 0x42);
     this.systemVersion          = tmdFile.getLong(headerOffsetInFile + 0x44);
     this.titleId                = tmdFile.getHexString(headerOffsetInFile + 0x4C, 0x8);
-    this.titleType              = tmdFile.getInt(headerOffsetInFile + 0x54);
+    this.titleType              = TitleType.getbyValue(tmdFile.getInt(headerOffsetInFile + 0x54));
     this.groupId                = tmdFile.getShort(headerOffsetInFile + 0x58);
     this.saveDataSize           = tmdFile.getInt(headerOffsetInFile + 0x5A);
     this.srlPrivateSaveDataSize = tmdFile.getInt(headerOffsetInFile + 0x5E);
@@ -113,16 +115,19 @@ public class Header {
 
   /**
    * Get the title type. <br>
-   * TODO: More investigation - Possibly relating to Title ID: UID Title type? https://www.3dbrew.org/wiki/Title_list
+   * <b>Note:</b> This field seems to be for Wii titles only. If this method is called on other TMDs,
+   * it will (possibly) always return {@code UNKNOWN_CT}.
    *
    * @return the title type.
    */
-  public int getTitleType() {
+  public HashSet<TitleType> getTitleType() {
     return titleType;
   }
 
   /**
-   * Get the group ID of the title.
+   * Get the group ID of the title. <br>
+   * <b>Note:</b> <b>Note:</b> This field seems to be for Wii titles only. If this method is called on other TMDs,
+   * it will (possibly) always return {@code 0}.
    *
    * @return The group ID.
    */
