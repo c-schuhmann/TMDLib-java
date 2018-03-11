@@ -2,10 +2,7 @@ package pro.schuhmann.tmdlib;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import pro.schuhmann.tmdlib.enums.ContentIndexType;
-import pro.schuhmann.tmdlib.enums.ContentTypeFlag;
-import pro.schuhmann.tmdlib.enums.PublicKeyType;
-import pro.schuhmann.tmdlib.enums.SignatureType;
+import pro.schuhmann.tmdlib.enums.*;
 import pro.schuhmann.tmdlib.parts.*;
 
 import java.io.File;
@@ -68,7 +65,8 @@ public class TMDTest {
     assertEquals(0, hd.getSignerCrlVersion());
     assertEquals(0, hd.getSystemVersion());
     assertTrue(titleId.equals(hd.getTitleId()));
-    assertEquals(64, hd.getTitleType());
+    assertEquals(1, hd.getTitleType().size());
+    assertTrue(hd.getTitleType().contains(TitleType.UNKNOWN_CT));
     assertEquals(0, hd.getGroupId());
     assertEquals(2048, hd.getSaveDataSize());
     assertEquals(0, hd.getSrlPrivateSaveDataSize());
