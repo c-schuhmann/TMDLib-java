@@ -3,7 +3,7 @@
 
 ### Usage & Requirements
 1. Include the library either:
-  * per compiled jar file - No other dependencies needed!
+  * per compiled jar file (no other dependencies needed)
   * per [JitPack.io](https://jitpack.io/#c-schuhmann/TMDLib-java/) (for usage within Maven, Gradle...)
 2. Get a TMD file
 3. Pass the file to the TMD constructor (pro.schuhmann.tmdlib.TMD)
@@ -15,6 +15,25 @@ console's (Wii/U, Switch...) aswell.
 
 You may want to look into this projects 
 [Javadoc](https://c-schuhmann.github.io/TMDLib-java/) for more information.
+
+### Example
+You have to obtain a TMD file first: You can download one from 
+[Nintendo's CDN](http://nus.cdn.c.shop.nintendowifi.net/ccs/download/00040000000EE000/tmd). 
+(Super Smash Bros. 4 in this example)
+
+```java
+import pro.schuhmann.tmdlib.TMD;
+
+public class TmdExample 
+{
+  public static void printTitleVersionAndContentCount(java.io.File f) throws java.io.IOException
+  {
+    TMD tmdFile = new TMD(new File("tmd"));
+    System.out.println("Version of the title: " + tmdFile.getHeader().getTitleVersion());
+    System.out.println("Number of contents: " + tmdFile.getHeader().getContentCount());
+  }
+}
+```
 
 ### Building
 You need at least JDK 1.7 and Maven.
