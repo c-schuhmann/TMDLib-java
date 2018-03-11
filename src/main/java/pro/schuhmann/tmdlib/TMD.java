@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class TMD {
 
+  private int signatureDataSize;
+
   private SignatureData signatureData;
   private Header header;
   private List<ContentInfoRecord> contentInfoRecords;
@@ -39,6 +41,15 @@ public class TMD {
    * @throws IOException An error occurred while reading the TMD file.
    */
   private void setup(TmdFileReader tmdFile) throws IOException {
+
+    signatureDataSize = setupSignatureData(tmdFile);
+    setupHeaderData(tmdFile);
+    setupContentInfoRecords(tmdFile);
+    setupContentChunkRecords(tmdFile);
+    setupCertificates(tmdFile);
+  }
+
+  private int setupSignatureData(TmdFileReader tmdFile) throws IOException {
     /*
      * --- Signature Data ---
      *
@@ -48,8 +59,10 @@ public class TMD {
      */
 
     this.signatureData = new SignatureData(tmdFile, 0);
-    final int signatureDataSize = signatureData.getSignatureType().getSignatureDataSize();
+    return signatureData.getSignatureType().getSignatureDataSize(); //
+  }
 
+  private void setupHeaderData(TmdFileReader tmdFile) throws IOException {
     /*
      * --- Header ---
      *
@@ -58,7 +71,9 @@ public class TMD {
      */
 
     this.header = new Header(tmdFile, signatureDataSize);
+  }
 
+  private void setupContentInfoRecords(TmdFileReader tmdFile) throws IOException {
     /*
      * --- Content Info Records ---
      *
@@ -82,7 +97,9 @@ public class TMD {
         break;
       }
     }
+  }
 
+  private void setupContentChunkRecords(TmdFileReader tmdFile) throws IOException {
     /*
      * --- Content Chunk Records ---
      *
@@ -96,7 +113,9 @@ public class TMD {
       int offset = signatureDataSize + 0x9C4 + chunkRecordIndex * 0x30;
       contentChunkRecords.add(new ContentChunkRecord(tmdFile, offset));
     }
+  }
 
+  private void setupCertificates(TmdFileReader tmdFile) throws IOException {
     /*
      * --- Certificates ---
      *
