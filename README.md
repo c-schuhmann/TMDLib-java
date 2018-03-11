@@ -2,13 +2,13 @@
 ## Java library for parsing Nintendo TMD (Title Metadata) files
 
 ### Table of Contents
-1. [Usage](#Usage)
-2. [Example](#Example)
-3. [Building](#Building)
-4. [Contributing](#Contributing)
-5. [Roadmap](#Roadmap)
-6. [Thanks](#Thanks)
-7. [Authors Note](#Authors-Note)
+1. [Usage](#usage)
+2. [Example](#example)
+3. [Building](#building)
+4. [Contributing](#contributing)
+5. [Roadmap](#roadmap)
+6. [Thanks](#thanks)
+7. [Authors Note](#authors-note)
 
 ### Usage
 1. Include the library either:
