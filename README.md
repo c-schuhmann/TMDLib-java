@@ -1,7 +1,16 @@
 # TMDLib-java [![Build Status](https://travis-ci.org/c-schuhmann/TMDLib-java.svg?branch=master)](https://travis-ci.org/c-schuhmann/TMDLib-java) [![](https://jitpack.io/v/c-schuhmann/TMDLib-java.svg)](https://jitpack.io/#c-schuhmann/TMDLib-java)
 ## Java library for parsing Nintendo TMD (Title Metadata) files
 
-### Usage & Requirements
+### Table of Contents
+1. [Usage](#Usage)
+2. [Example](#Example)
+3. [Building](#Building)
+4. [Contributing](#Contributing)
+5. [Roadmap](#Roadmap)
+6. [Thanks](#Thanks)
+7. [Authors Note](#Authors Note)
+
+### Usage
 1. Include the library either:
   * per compiled jar file (no other dependencies needed)
   * per [JitPack.io](https://jitpack.io/#c-schuhmann/TMDLib-java/) (for usage within Maven, Gradle...)
@@ -46,13 +55,12 @@ Give me some advice, what I can do better :)
 ### Roadmap
 - Rework some classes and methods (Planned for release 1.0.0)
 - Add compatibility for other TMD types (Planned for release 1.0.0 or later)
-- Add usage examples (some time)
 
 ### Thanks
 This project would'nt be possible without [3DBrew](https://3dbrew.org/wiki/Title_metadata)!
 The TMD file structure is very well described there.
 
-#### Extra: The reason why I started this project
+#### Authors Note
 At the time I'm writing this readme file right now, I'm in the process of learning Java.
 I was always a big fan of the Nintendo Homebrew Scene, so I thought: Hey, let's do a Homebrew-themed project!
 
