@@ -44,9 +44,22 @@ public class TMD {
 
     signatureDataSize = setupSignatureData(tmdFile);
     setupHeaderData(tmdFile);
+
+    System.out.println("3DS: " + is3dsTmd(tmdFile));
+
     setupContentInfoRecords(tmdFile);
     setupContentChunkRecords(tmdFile);
     setupCertificates(tmdFile);
+  }
+
+  private boolean is3dsTmd(TmdFileReader tmdFile) throws IOException {
+    int offsetAfterContentInfoRecords = signatureDataSize + 0xC4 + 0x30 * header.getContentCount();
+    if (offsetAfterContentInfoRecords == tmdFile.getFileLength() ||
+            tmdFile.getInt(offsetAfterContentInfoRecords) == 0x010001) {
+      return false; // Content Info records are missing: Not 3DS
+    }
+
+    return true; // Content Info records are available: 3DS
   }
 
   private int setupSignatureData(TmdFileReader tmdFile) throws IOException {
